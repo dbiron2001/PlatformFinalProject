@@ -1,5 +1,6 @@
 <template>
-  <div class="fixed inset-0 flex items-start justify-center bg-beige z-0 pt-[80px]">
+  <!-- Full Page Scrollable Layout -->
+  <div class="relative w-full min-h-screen bg-beige pt-[100px] flex items-start justify-center">
     <div class="relative w-full max-w-[750px] aspect-[750/646]">
       <!-- Floorplan Image -->
       <img
@@ -12,21 +13,18 @@
       <div
         v-for="(room, index) in rooms"
         :key="index"
-        class="room absolute z-10 cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-2xl hover:shadow-green-300/50 hover:z-50 hover:border-2 hover:border-black"
+        class="room absolute z-10 cursor-pointer transition-all duration-200 rounded-[10px] backdrop-blur-sm bg-white/20 border border-white/50 hover:bg-white/30 hover:scale-105 hover:shadow-2xl hover:shadow-green-300/50 hover:z-50 hover:border-2 hover:border-black hover:rounded-[15px]"
         :style="getOverlayStyle(room)"
         @click="openModal(room)"
       >
         <img :src="room.image" :alt="room.name" class="w-full h-full object-contain rounded-inherit" />
       </div>
-
-
-
-
     </div>
 
+    <!-- Modal -->
     <div
       v-if="activeRoom"
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[999]"
     >
       <div class="bg-white rounded-lg p-6 w-11/12 max-w-2xl relative">
         <button
@@ -64,7 +62,6 @@
     </div>
   </div>
 </template>
-
 
 <script setup>
 import { ref, computed } from 'vue'
@@ -191,9 +188,5 @@ const getOverlayStyle = (room) => {
 <style scoped>
 .bg-beige {
   background-color: #F5E7D8;
-}
-
-.room:hover{
-
 }
 </style>
