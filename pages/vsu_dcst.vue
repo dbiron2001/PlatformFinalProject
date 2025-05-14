@@ -1,9 +1,6 @@
 <template>
     <NavBar />
     <FloorPlan />
-    <div>
-        this is vsu_dcst page
-    </div>
 </template>
 
 <script setup>

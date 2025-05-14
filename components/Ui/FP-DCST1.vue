@@ -1,23 +1,31 @@
 <template>
   <!-- Full Page Scrollable Layout -->
-  <div class="relative w-full min-h-screen bg-beige pt-[100px] flex items-start justify-center">
-    <div class="relative w-full max-w-[750px] aspect-[750/646]">
-      <!-- Floorplan Image -->
-      <img
-        :src="currentFloorImage"
-        alt="Floor Layout"
-        class="w-full h-auto object-contain pointer-events-none"
-      />
+  <div class="relative w-full min-h-screen bg-beige pt-[20px] flex items-start justify-center">
+    <div class="w-full max-w-[1200px] flex flex-col lg:flex-row">
+      <!-- Floorplan Container (75% in Landscape) -->
+      <div class="w-full lg:w-3/5 relative aspect-[750/646] lg:ml-[20px] lg:mr-[20px] lg:mb-[-100px]">
+        <img
+          :src="currentFloorImage"
+          alt="Floor Layout"
+          class="w-full h-auto object-contain pointer-events-none"
+        />
 
-      <!-- Room Overlays -->
-      <div
-        v-for="(room, index) in rooms"
-        :key="index"
-        class="room absolute z-10 cursor-pointer transition-all duration-200 rounded-[10px] backdrop-blur-sm bg-white/20 border border-white/50 hover:bg-white/30 hover:scale-105 hover:shadow-2xl hover:shadow-green-300/50 hover:z-50 hover:border-2 hover:border-black hover:rounded-[15px]"
-        :style="getOverlayStyle(room)"
-        @click="openModal(room)"
-      >
-        <img :src="room.image" :alt="room.name" class="w-full h-full object-contain rounded-inherit" />
+        <!-- Room Overlays -->
+        <div
+          v-for="(room, index) in rooms"
+          :key="index"
+          class="room absolute z-10 cursor-pointer transition-all duration-200 rounded-[10px] bg-white/20 border border-white/50 hover:bg-white/30 hover:scale-105 hover:shadow-2xl hover:shadow-green-300/50 hover:z-50 hover:border-2 hover:border-black hover:rounded-[15px]"
+          :style="getOverlayStyle(room)"
+          @click="openModal(room)"
+        >
+          <img :src="room.image" :alt="room.name" class="w-full h-full object-contain rounded-inherit" />
+        </div>
+      </div>
+
+      <!-- Info Container (25% in Landscape, Below Floorplan in Portrait) -->
+      <div class="w-full lg:w-1/4 lg:mt-0 mt-6 lg:pl-6 lg:pt-[10px] text-center lg:text-left portrait:pt-[0px] portrait:mt-[-60px]">
+        <h3 class="text-xl font-bold mb-2">Building Information</h3>
+        <p class="text-sm">Here you can add detailed building info like departments, floor names, and any important information regarding the layout.</p>
       </div>
     </div>
 
@@ -62,6 +70,7 @@
     </div>
   </div>
 </template>
+
 
 <script setup>
 import { ref, computed } from 'vue'
@@ -111,7 +120,7 @@ const roomsByFloor = {
       location: 'North Central',
       image: '/images/Faculty-Office.png',
       photos: [],
-      bounds: { top: 5.6, left: 42.4, width: 18, height: 26.5 },
+      bounds: { top: 5.6, left: 42.3, width: 18.5, height: 26.6 },
     },
     {
       name: "Dean's Office",
@@ -127,7 +136,7 @@ const roomsByFloor = {
       location: 'South-West Wing',
       image: '/images/Aquarium.png',
       photos: [],
-      bounds: { top: 37, left: 2.3, width: 31, height: 28 },
+      bounds: { top: 37, left: 2.4, width: 31.3, height: 28 },
     },
   ],
   second: [
@@ -188,5 +197,35 @@ const getOverlayStyle = (room) => {
 <style scoped>
 .bg-beige {
   background-color: #F5E7D8;
+}
+
+@media (max-width: 1024px) {
+  /* In portrait, info section moves below */
+  .lg\:flex-row {
+    flex-direction: column;
+  }
+
+  .lg\:w-3\/4 {
+    width: 100%;
+  }
+
+  .lg\:w-1\/4 {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Landscape */
+  .lg\:w-3\/4 {
+    width: 75%;
+  }
+
+  .lg\:w-1\/4 {
+    width: 25%;
+  }
+
+  .lg\:pl-6 {
+    padding-left: 1.5rem;
+  }
 }
 </style>
