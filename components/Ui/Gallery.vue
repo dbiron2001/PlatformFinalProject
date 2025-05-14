@@ -16,7 +16,7 @@
       <img :src="location.image" :alt="location.name" />
       <div v-if="expandedIndex === index" class="details">
         <NuxtLink
-          :to="`/pages/${location.id}`"
+          :to="`/${location.id}`"
           class="location-name"
           @click.stop
         >
@@ -48,19 +48,19 @@ const galleryRef = ref(null);
 const expandedStyles = reactive({});
 const locations = ref([
   {
-    id: "library",
+    id: "vsu_library",
     name: "Campus Library",
     image: "/images/library.jpg",
     description: "The central hub for study and research."
   },
   {
-    id: "dcst",
+    id: "vsu_dcst",
     name: "Department of Computer Science And Technology Building",
     image: "/images/dcst.jpg",
     description: "Code and Grind, free wifi for all."
   },
   {
-    id: "IHK",
+    id: "ihk",
     name: "Institute of Human Kinetics",
     image: "/images/dcst.jpg",
     description: "Stay fit and healthy on campus."

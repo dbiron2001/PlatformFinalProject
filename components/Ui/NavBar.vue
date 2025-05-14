@@ -19,7 +19,7 @@
           type="text"
           v-model="searchQuery"
           @keyup.enter="handleSearch"
-          placeholder="Search for components..."
+          placeholder="Search for destination..."
           class="navBar-search"
         />
       </nav>
@@ -42,7 +42,7 @@ const toggleMenu = () => {
 const handleSearch = async () => {
   const query = searchQuery.value?.trim().toLowerCase()
   if (!query || !searchMap[query]) {
-    alert('Component not found.')
+    alert('Destination not found.')
     return
   }
 
