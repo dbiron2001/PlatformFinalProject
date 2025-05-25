@@ -1,5 +1,9 @@
 <template>
-    <div>
-        this is vsu_ihk page
-    </div>
+    <NavBar />
+    <FloorPlan />
 </template>
+
+<script setup>
+import NavBar from '~/components/Ui/NavBar.vue'
+import FloorPlan from '~/components/Ui/FP-IHK.vue';
+</script>

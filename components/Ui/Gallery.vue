@@ -60,7 +60,7 @@ const locations = ref([
     description: "Code and Grind, free wifi for all."
   },
   {
-    id: "ihk",
+    id: "vsu_ihk",
     name: "Institute of Human Kinetics",
     image: "/images/dcst.jpg",
     description: "Stay fit and healthy on campus."
