@@ -24,8 +24,16 @@
 
       <!-- Info Container (25% in Landscape, Below Floorplan in Portrait) -->
       <div class="w-full lg:w-1/4 lg:mt-0 mt-6 lg:pl-6 lg:pt-[10px] text-center lg:text-left portrait:pt-[0px] portrait:mt-[-60px]">
+  
+        <div class="mb-4 text-2xl font-bold z-20">
+            {{ formatFloorName(currentFloor) }}
+        </div>
+
         <h3 class="text-xl font-bold mb-2">Building Information</h3>
-        <p class="text-sm">Here you can add detailed building info like departments, floor names, and any important information regarding the layout.</p>
+        <p class="text-sm">
+            Here you can add detailed building info like departments, floor names, and any important information regarding the layout.
+        </p>
+
       </div>
     </div>
 
@@ -85,6 +93,13 @@ const floorImages = {
   second: '/images/dcst/secondFloor.png',
 }
 const currentFloorImage = computed(() => floorImages[currentFloor.value])
+const formatFloorName = (floorKey) => {
+  const names = {
+    first: '1st Floor',
+    second: '2nd Floor',
+  }
+  return names[floorKey] || floorKey
+}
 
 // Room Data
 const roomsByFloor = {
