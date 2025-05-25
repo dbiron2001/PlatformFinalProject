@@ -81,8 +81,8 @@ const currentFloor = ref('first')
 
 // Floor Images
 const floorImages = {
-  first: '/images/firstFloor.png',
-  second: '/images/secondFloor.png',
+  first: '/images/dcst/firstFloor.png',
+  second: '/images/dcst/secondFloor.png',
 }
 const currentFloorImage = computed(() => floorImages[currentFloor.value])
 
@@ -93,23 +93,23 @@ const roomsByFloor = {
       name: 'ICT-101',
       description: 'Computer lab with modern facilities.',
       location: 'North Wing, 1st Floor',
-      image: '/images/ICT-101.png',
-      photos: ['/images/ICT-101.png'],
+      image: '/images/dcst/ICT-101.png',
+      photos: ['/images/dcst/ICT-101.png'],
       bounds: { top: 5.9, left: 17, width: 25.5, height: 27 }, // adjusted
     },
     {
       name: 'ICT-102',
       description: 'Second computer lab.',
       location: 'North-East Wing, 1st Floor',
-      image: '/images/ICT-102.png',
-      photos: ['/images/ICT-102.png'],
+      image: '/images/dcst/ICT-102.png',
+      photos: ['/images/dcst/ICT-102.png'],
       bounds: { top: 5.5, left: 61, width: 22, height: 34.3 }, // added
     },
     {
       name: 'Spiral Stairs',
       description: 'Stairs to second floor.',
       location: 'Center Lobby',
-      image: '/images/Spiral-Stairs.png',
+      image: '/images/dcst/Spiral-Stairs.png',
       photos: [],
       bounds: { top: 33.5, left: 35, width: 22, height: 14.5 }, // adjusted
     },
@@ -118,7 +118,7 @@ const roomsByFloor = {
       name: 'Faculty Office',
       description: 'Shared office for faculty members.',
       location: 'North Central',
-      image: '/images/Faculty-Office.png',
+      image: '/images/dcst/Faculty-Office.png',
       photos: [],
       bounds: { top: 5.6, left: 42.3, width: 18.5, height: 26.6 },
     },
@@ -126,7 +126,7 @@ const roomsByFloor = {
       name: "Dean's Office",
       description: 'Office of the Dean.',
       location: 'South-East Wing',
-      image: '/images/Dean-Office.png',
+      image: '/images/dcst/Dean-Office.png',
       photos: [],
       bounds: { top: 39.7, left: 60.4, width: 36, height: 25 },
     },
@@ -134,25 +134,43 @@ const roomsByFloor = {
       name: 'Aquarium',
       description: 'Glass-walled multipurpose area.',
       location: 'South-West Wing',
-      image: '/images/Aquarium.png',
+      image: '/images/dcst/Aquarium.png',
       photos: [],
       bounds: { top: 37, left: 2.4, width: 31.3, height: 28 },
     },
   ],
   second: [
     {
-      name: 'Library',
+      name: 'ICT-201A/201B',
       description: 'Study space and resource center.',
       location: 'North Wing, 2nd Floor',
-      photos: ['/images/library_1.jpg'],
-      bounds: { top: 10, left: 10, width: 30, height: 30 },
+      image: '/images/dcst/ICT-201.png',
+      photos: ['/images/dcst/ICT-201'],
+      bounds: { top: 5, left: 15.4, width: 35.5, height: 27.5 },
+    },
+    {
+      name: 'ICT-202',
+      description: 'Study space and resource center.',
+      location: 'North Wing, 2nd Floor',
+      image: '/images/dcst/ICT-202.png',
+      photos: ['/images/dcst/ICT-201'],
+      bounds: { top: 5.7, left: 50.8, width: 31.7, height: 27 },
+    },
+    {
+      name: 'ICT-203',
+      description: 'Study space and resource center.',
+      location: 'North Wing, 2nd Floor',
+      image: '/images/dcst/ICT-203.png',
+      photos: ['/images/dcst/ICT-201'],
+      bounds: { top: 32.3, left: 58.1, width: 37, height: 33.2 },
     },
     {
       name: 'Back to 1st Floor',
       description: 'Stairs back to ground floor.',
       location: 'Central Lobby',
+      image: '/images/dcst/Spiral-Stairs2nd.png',
       photos: [],
-      bounds: { top: 30, left: 30, width: 10, height: 15 },
+      bounds: { top: 33.6, left: 32.7, width: 23, height: 16.5 },
       isBack: true,
     },
   ],
