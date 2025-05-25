@@ -40,14 +40,59 @@ font-bold text-black text-center rounded px-2 py-[1px] pointer-events-none"
         <div class="mb-4 text-2xl font-bold z-20">
             {{ formatFloorName(currentFloor) }}
         </div>
-
-        <h3 class="text-xl font-bold mb-2">Building Information</h3>
-        <p class="text-sm">
-            Here you can add detailed building info like departments, floor names, and any important information regarding the layout.
+    <!-- Scrollable Room List -->
+        <div class="max-h-[450px] overflow-y-auto pr-2">
+            <h3 class="text-xl font-bold mb-2">Library</h3>
+        <p class="text-sm mb-4">
+            A welcoming space for study and research, this three-story library offers a variety of rooms and seating options, including tables and couches for both individual and group study. The ground floor houses thesis books and the circulation and information counter for easy access to library services. Additionally, the mezzanine, located within the ground floor, contains Filipiniana books, providing a dedicated space for local and historical literature. The second floor holds circulation books, while the third floor is home to general reference materials such as atlases, dictionaries, and more.
         </p>
+            <h2 class="text-base font-semibold mb-1">Rooms:</h2>
 
-      </div>
-    </div>
+            <h3 class="font-medium mt-2">Ground Floor:</h3>
+            <ul class="list-disc list-inside ml-4">
+            <li>Office of the Chief Librarian</li>
+            <li>Discussion Room 1</li>
+            <li>Discussion Room 2</li>
+            <li>Discussion Room 3</li>
+            <li>Preservation and Bindery</li>
+            <li>Pantry</li>
+            <li>Stock Room</li>
+            <li>Toilet</li>
+            <li>Unlabelled Rooms</li>
+            <li>Emergency Exit</li>
+            </ul>
+
+            <h3 class="font-medium mt-4">Mezzanine:</h3>
+            <ul class="list-disc list-inside ml-4">
+            <li>Culture and the ARTS Center</li>
+            <li>Unlabelled Room</li>
+            </ul>
+
+            <h3 class="font-medium mt-4">2nd Floor:</h3>
+            <ul class="list-disc list-inside ml-4">
+            <li>Discussion Room 4</li>
+            <li>Discussion Room 5</li>
+            <li>Discussion Room 6</li>
+            <li>Computer-Based Literature Service</li>
+            <li>Technical Service Section</li>
+            <li>Readers Service Section</li>
+            <li>Electrical/Server Rooms</li>
+            <li>Stock Room</li>
+            <li>Toilet</li>
+            <li>Unlabelled Rooms</li>
+            <li>Emergency Exit</li>
+            </ul>
+
+            <h3 class="font-medium mt-4">3rd Floor:</h3>
+            <ul class="list-disc list-inside ml-4">
+            <li>Audio/Visual Room</li>
+            <li>Graduating Studies</li>
+            <li>Unlabelled Room</li>
+            <li>Emergency Exit</li>
+            </ul>
+        </div>
+        </div>
+        </div>
 
     <!-- Modal -->
     <div
