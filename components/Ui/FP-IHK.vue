@@ -1,5 +1,9 @@
 <template>
   <!-- Full Page Scrollable Layout -->
+   <p class="bg-beige text-sm italic text-gray-500 pl-20 pt-2.5">
+  Note: Hover or click rooms/locations to view details and medias.
+</p>
+
   <div class="relative w-full min-h-screen bg-beige pt-[20px] flex items-start justify-center">
     <div class="w-full max-w-[1200px] flex flex-col lg:flex-row">
       <!-- Floorplan Container (75% in Landscape) -->
@@ -12,12 +16,14 @@
 
         <!-- Room Overlays -->
         <div
-          v-for="(room, index) in rooms"
-          :key="index"
-          class="room absolute z-10 cursor-pointer transition-all duration-200 rounded-[5px] bg-white/20 border border-white/50 hover:bg-white/30 hover:scale-105 hover:shadow-2xl hover:shadow-green-300/50 hover:z-50 hover:border-2 hover:border-black hover:rounded-[5px]"
-          :style="getOverlayStyle(room)"
-          @click="openModal(room)"
+        v-for="(room, index) in rooms"
+        :key="index"
+        :id="room.name.toLowerCase().replace(/\s+/g, '-')"
+        class="room absolute z-10 cursor-pointer transition-all duration-200 rounded-[5px] bg-white/20 shadow-2xl shadow-white-200/50 hover:bg-white/30 hover:scale-105 hover:shadow-2xl hover:shadow-green-300/50 hover:z-50 hover:border-2 hover:border-black hover:rounded-[5px]"
+        :style="getOverlayStyle(room)"
+        @click="openModal(room)"
         >
+
           <img :src="room.image" :alt="room.name" class="w-full h-full object-contain rounded-inherit" />
         </div>
       </div>
@@ -102,23 +108,59 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { onMounted} from 'vue'
+import { useRoute } from 'vue-router'
 
-const activeRoom = ref(null)
-const currentSlide = ref(0)
-const currentFloor = ref('first')
+const route = useRoute();
 
-// Floor Images
-const floorImages = {
-  first: '/images/ihk/ihk.png',
-}
-const currentFloorImage = computed(() => floorImages[currentFloor.value])
-const formatFloorName = (floorKey) => {
-  const names = {
-    first: '1st Floor',
-    second: '2nd Floor',
+const currentFloor = ref(route.query.floor || 'first');
+
+// Watch for route changes
+watch(() => route.query.floor, (newFloor) => {
+  if (newFloor) {
+    currentFloor.value = newFloor;
+    // Small delay to ensure DOM is ready before highlighting
+    setTimeout(highlightRoom, 100);
   }
-  return names[floorKey] || floorKey
-}
+});
+
+// Update highlightRoom to work with the current floor
+const highlightRoom = () => {
+  if (!route.query.target) return;
+  
+  const id = route.query.target.toLowerCase().replace(/\s+/g, '-');
+  const el = document.getElementById(id);
+  
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    el.classList.add('highlighted-room');
+    
+    setTimeout(() => {
+      el.classList.remove('highlighted-room');
+    }, 5000);
+  }
+};
+
+// Call highlightRoom on mounted
+onMounted(() => {
+  if (route.query.target) {
+    highlightRoom();
+  }
+});
+
+const props = defineProps({
+  target: {
+    type: String,
+    default: ''
+  }
+})
+
+const targetRoom = ref(props.target)
+
+watch(() => props.target, (newTarget) => {
+  targetRoom.value = newTarget
+  highlightRoom()
+})
 
 // Room Data
 const roomsByFloor = {
@@ -302,6 +344,23 @@ const getOverlayStyle = (room) => {
 
   .lg\:pl-6 {
     padding-left: 1.5rem;
+  }
+}
+.highlighted-room {
+  animation: pulse 2s infinite;
+  border: 2px solid #ff0000 !important;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.7) !important;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 0, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
   }
 }
 </style>
