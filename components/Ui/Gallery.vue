@@ -62,7 +62,7 @@ const locations = ref([
   {
     id: "vsu_ihk",
     name: "Institute of Human Kinetics",
-    image: "/images/dcst.jpg",
+    image: "/images/ihk.jpg",
     description: "Stay fit and healthy on campus."
   }
 ]);
