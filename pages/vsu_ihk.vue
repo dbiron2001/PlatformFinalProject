@@ -1,5 +1,14 @@
 <template>
-    <div>
-        this is vsu_ihk page
-    </div>
+  <NavBar />
+  <FloorPlan 
+    :target="route.query.target"
+    :default-floor="route.query.floor"
+  />
 </template>
+
+<script setup>
+import { useRoute } from 'vue-router';
+import NavBar from '~/components/Ui/NavBar.vue'
+import FloorPlan from '~/components/Ui/FP-IHK.vue';
+const route = useRoute();
+</script>

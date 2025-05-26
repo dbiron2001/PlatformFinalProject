@@ -21,43 +21,65 @@
           @keyup.enter="handleSearch"
           placeholder="Search for destination..."
           class="navBar-search"
+          autocomplete="off"
+          list="rooms-list"
         />
+        <datalist id="rooms-list">
+          <option
+            v-for="room in roomNames"
+            :key="room"
+            :value="room"
+          />
+        </datalist>
       </nav>
     </header>
   </client-only>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { searchMap } from '~/utils/searchMap'
+import { useRouter } from 'vue-router'
 
-const searchQuery = ref('')
+const router = useRouter()
+const searchQuery = ref('') // Ensure this is initialized
 const menuOpen = ref(false)
-const router = useRouter() // ✅ Nuxt 3 auto-import
 
 const toggleMenu = () => {
   menuOpen.value = !menuOpen.value
 }
 
 const handleSearch = async () => {
-  const query = searchQuery.value?.trim().toLowerCase()
-  if (!query || !searchMap[query]) {
-    alert('Destination not found.')
-    return
+  const query = searchQuery.value?.trim().toLowerCase();
+  if (!query) return;
+
+  const match = Object.entries(searchMap).find(([key]) => 
+    key.includes(query) || query.includes(key)
+  );
+
+  if (!match) {
+    alert('Destination not found. Please try a different search term.');
+    return;
   }
 
-  const { path, targetId } = searchMap[query]
-  await router.push(path)
-
-  setTimeout(() => {
-    const target = document.getElementById(targetId)
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'center' })
-      target.classList.add('highlighted')
-      setTimeout(() => target.classList.remove('highlighted'), 2000)
+  const { path, targetId, defaultFloor } = match[1];
+  
+  // Navigate with both target and floor parameters
+  await navigateTo({
+    path,
+    query: {
+      target: targetId.toLowerCase().replace(/\s+/g, '-'),
+      floor: defaultFloor // Pass the floor parameter
     }
-  }, 500)
-}
+  });
+
+  searchQuery.value = '';
+  menuOpen.value = false;
+};
+
+const roomNames = computed(() => Object.keys(searchMap).map(name => 
+  name.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+))
 </script>
 
 <style scoped>
