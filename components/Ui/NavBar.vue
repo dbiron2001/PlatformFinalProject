@@ -4,7 +4,7 @@
       <nav class="navBar-left">
         <button @click="toggleMenu" class="menu-button">☰</button>
         <div v-if="menuOpen" class="menu-column">
-          <NuxtLink to="/about" class="menu-item">About Us</NuxtLink>
+          <NuxtLink to="/about_us" class="menu-item">About Us</NuxtLink>
           <NuxtLink to="/options" class="menu-item">Options</NuxtLink>
           <!-- Add more routes as needed -->
         </div>
