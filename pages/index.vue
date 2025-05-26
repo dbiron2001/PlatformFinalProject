@@ -5,7 +5,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import Navbar from '/components/Ui/Navbar.vue'
+import Navbar from '/components/Ui/NavBar.vue'
 import Gallery from '/components/Ui/Gallery.vue'
 
 const searchQuery = ref('')
