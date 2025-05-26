@@ -16,7 +16,7 @@
       <img :src="location.image" :alt="location.name" />
       <div v-if="expandedIndex === index" class="details">
         <NuxtLink
-          :to="`/${location.id}`"
+          :to="`./${location.id}`"
           class="location-name"
           @click.stop
         >

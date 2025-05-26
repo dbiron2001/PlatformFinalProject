@@ -11,4 +11,5 @@ import { useRoute } from 'vue-router';
 import NavBar from '~/components/Ui/NavBar.vue'
 import FloorPlan from '~/components/Ui/FP-IHK.vue';
 const route = useRoute();
+const id = route.params.id
 </script>

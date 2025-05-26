@@ -2,6 +2,10 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
+  ssr: false, // or use nitro preset below
+  nitro: {
+    preset: "static",
+  },
 
   modules: [
     "@nuxtjs/tailwindcss",
@@ -32,5 +36,17 @@ export default defineNuxtConfig({
         type: true,
       },
     ],
+  },
+  app: {
+    head: {
+      title: 'My Nuxt App',
+      meta: [
+        { name: 'description', content: 'My Nuxt 3 App' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      ],
+      link: [
+        { rel: 'icon', type: 'image/png', href: '/favicon.png' },
+      ],
+    },
   },
 });

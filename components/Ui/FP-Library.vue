@@ -289,6 +289,7 @@ const roomsByFloor = {
       bounds: { top: 48, left: 12.7, width: 9.5, height: 22.7 },
     },
     {
+      name: 'Stairs',
       description: 'Stairs to the Mezzanine.',
       location: 'North Wing',
       image: '/images/lib/first/stairs to 1.5r.png',
@@ -315,6 +316,7 @@ const roomsByFloor = {
       bounds: { top: 20.5, left: 37, width: 26.5, height: 10 }, // adjusted
     },
     {
+      name: 'Stairs',
       label: "Main Lobby",
       description: 'Stairs back to the main lobby.',
       location: 'North WIng',
@@ -359,6 +361,7 @@ const roomsByFloor = {
       bounds: { top: 27.2, left: 38.5, width: 27.5, height: 27.5 },
     },
     {
+      name: 'Stairs',
       label: 'Back to 1st Floor',
       description: 'Stairs back to ground floor.',
       location: 'Central Lobby',
@@ -369,7 +372,7 @@ const roomsByFloor = {
       targetFloor: 'first',
     },
     {
-      name: '',
+      name: 'Stairs',
       description: 'Stairs back to ground floor.',
       location: 'Central Lobby',
       image: '/images/lib/second/to3rd.png',
@@ -397,6 +400,7 @@ const roomsByFloor = {
       bounds: { top: 63, left: 69.4, width: 12.5, height: 9.65 },
     },
     {
+      name: 'Stairs',
       label: 'Back to 2nd Floor',
       description: 'Stairs back to 2nd floor.',
       location: 'Central Lobby',

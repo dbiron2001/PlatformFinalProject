@@ -16,17 +16,24 @@
 
         <!-- Room Overlays -->
         <div
-        v-for="(room, index) in rooms"
-        :key="index"
-        :id="room.name.toLowerCase().replace(/\s+/g, '-')"
-        class="room absolute z-10 cursor-pointer transition-all duration-200 rounded-[5px] bg-white/20 shadow-2xl shadow-white-200/50 hover:bg-white/30 hover:scale-105 hover:shadow-2xl hover:shadow-green-300/50 hover:z-50 hover:border-2 hover:border-black hover:rounded-[5px]"
-        :style="getOverlayStyle(room)"
-        @click="openModal(room)"
-        >
-
-          <img :src="room.image" :alt="room.name" class="w-full h-full object-contain rounded-inherit" />
+  v-for="(room, index) in rooms"
+  :key="index"
+  :id="(room.name || room.label || '').toLowerCase().replace(/\s+/g, '-')"
+  class="room absolute z-10 cursor-pointer transition-all duration-200 rounded-[5px] bg-white/20 shadow-2xl shadow-white-200/50 hover:bg-white/30 hover:scale-105 hover:shadow-2xl hover:shadow-green-300/50 hover:z-50 hover:border-2 hover:border-black hover:rounded-[5px]"
+  :style="getOverlayStyle(room)"
+  @click="openModal(room)"
+>
+  <img :src="room.image" :alt="room.name" class="w-full h-full object-contain rounded-inherit pointer-events-none" />
+  <!-- Label only for navigation overlays -->
+  <div
+    v-if="room.targetFloor"
+    class="absolute top-0 left-0 right-0 text-[11px] bg-white bg-opacity-50 font-bold text-black text-center rounded px-2 py-[1px] pointer-events-none"
+  >
+    {{ room.label || formatFloorName(room.targetFloor) }}
+  </div>
+</div>
         </div>
-      </div>
+        
 
       <!-- Info Container (25% in Landscape, Below Floorplan in Portrait) -->
 <div class="w-full lg:w-1/4 lg:mt-0 mt-6 lg:pl-6 lg:pt-[10px] text-center lg:text-left portrait:pt-[0px] portrait:mt-[-60px]">
@@ -112,6 +119,8 @@ import { onMounted} from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute();
+const activeRoom = ref(null)
+const currentSlide = ref(0)
 
 const currentFloor = ref(route.query.floor || 'first');
 
@@ -161,6 +170,9 @@ watch(() => props.target, (newTarget) => {
   targetRoom.value = newTarget
   highlightRoom()
 })
+const floorImages = {
+  first: '/images/ihk/ihk.png',
+}
 
 // Room Data
 const roomsByFloor = {
@@ -286,7 +298,16 @@ const rooms = computed(() => roomsByFloor[currentFloor.value])
 
 // Modal Logic
 const openModal = (room) => {
-  // Remove floor-switch logic if the building is single-floor
+  if (room.targetFloor) {
+    currentFloor.value = room.targetFloor
+    return
+  }
+
+  if (room.isBack && room.targetFloor) {
+    currentFloor.value = room.targetFloor
+    return
+  }
+
   activeRoom.value = room
   currentSlide.value = 0
 }
@@ -310,6 +331,8 @@ const getOverlayStyle = (room) => {
     height: `${height}%`,
   }
 }
+
+const currentFloorImage = computed(() => floorImages[currentFloor.value])
 </script>
 
 <style scoped>

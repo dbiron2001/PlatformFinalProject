@@ -1,10 +1,12 @@
 <template>
-  <UiNavBar />
-  <UiGallery />
+  <NavBar />
+  <Gallery />
 </template>
 
 <script setup>
-
+import { ref } from 'vue';
+import NavBar from '~/components/Ui/NavBar.vue'
+import Gallery from '~/components/Ui/Gallery.vue';
 // const searchQuery = ref('')
 </script>
 
